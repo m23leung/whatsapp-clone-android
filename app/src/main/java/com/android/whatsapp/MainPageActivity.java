@@ -1,9 +1,11 @@
 package com.android.whatsapp;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.Manifest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +19,7 @@ public class MainPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_page);
 
         Button mLogout = findViewById(R.id.logout);
-        Button mFinduser = findViewById(R.id.findUser);
+        Button mFindUser = findViewById(R.id.findUser);
 
         mFindUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,5 +39,13 @@ public class MainPageActivity extends AppCompatActivity {
                 return;
             }
         });
+
+        getPermissions();
+    }
+
+    private void getPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS}, 1);
+        }
     }
 }
